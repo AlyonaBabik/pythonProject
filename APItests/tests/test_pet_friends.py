@@ -49,4 +49,10 @@ def test_successful_update_self_pet_info(name='Мурзик', animal_type='Ко�
     else:
         raise Exception("There is no my pets")
         
+def test_add_new_pet_without_photo_with_valid_data(name="Кузя", animal_type='собака', age='5'):
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+    status, result = pf.add_new_pet_no_photo(auth_key, name, animal_type, age)
+    assert status == 200
+    assert result['name'] == name
+    assert result['pet_photo'] == ''
         
