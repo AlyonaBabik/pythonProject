@@ -56,3 +56,15 @@ def test_add_new_pet_without_photo_with_valid_data(name="Кузя", animal_type=
     assert result['name'] == name
     assert result['pet_photo'] == ''
         
+def test_get_api_key_for_invalid_email(email='wrong@mail.ru', password=valid_password):
+    status, result = pf.get_api_key(email, password)
+    assert status == 403
+    assert 'key' not in result
+    
+def test_get_api_key_for_invalid_password(email=valid_email, password='66666'):
+    status, result = pf.get_api_key(email, password)
+    assert status == 403
+    assert 'key' not in result
+
+    
+    
