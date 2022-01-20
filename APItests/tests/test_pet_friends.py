@@ -66,7 +66,7 @@ def test_get_api_key_for_invalid_password(email=valid_email, password='66666'):
     assert status == 403
     assert 'key' not in result
     
-def test_add_photo_of_pet(pet_photo='images/02.jpg'):
+def test_add_photo_of_pet(pet_photo='Lovebird.jpg'):
     _, auth_key = pf.get_api_key(valid_email, valid_password)
     _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
     status, result = pf.add_photo_of_pet(auth_key, my_pets['pets'][0]['id'], pet_photo)
