@@ -66,15 +66,27 @@ def test_get_api_key_for_invalid_password(email=valid_email, password='66666'):
     assert status == 403
     assert 'key' not in result
     
-def test_add_photo_of_pet(pet_photo='Lovebird.jpg'):
+def test_get_my_pets_with_valid_key(filter='my_pets'):
     _, auth_key = pf.get_api_key(valid_email, valid_password)
-    _, my_pets = pf.get_list_of_pets(auth_key, "my_pets")
-    status, result = pf.add_photo_of_pet(auth_key, my_pets['pets'][0]['id'], pet_photo)
+    status, result = pf.get_list_of_pets(auth_key, filter)
+    if len(result['pets']) > 0:
+        assert status == 200
+    else:
+        raise Exception("There is no my pets")
+       
+    
+def test_add_new_pet_with_negative_age(name='Fred', animal_type='dog', age='-5', pet_photo='images/Lovebird.jpg'):
+    pet_photo = os.path.join(os.path.dirname(__file__), pet_photo)
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+    status, result = pf.add_new_pet(auth_key, name, animal_type, age, pet_photo)
+    assert status == 400
+    """Ожидаемый ответ сервера не совпадает с логичным, вероятно баг. При смене assert status == 200 тест положительный"""
+
+    
+def test_add_new_pet_with_no_data(name='', animal_type='',age=''):
+    _, auth_key = pf.get_api_key(valid_email, valid_password)
+    status, result = pf.add_new_pet_no_photo(auth_key, name, animal_type, age)
     assert status == 200
-    assert result['pet_photo'] != ''
-
-
-    
-
-    
-    
+    assert result['name'] == ''
+    assert result['pet_photo'] == ''        
+        
