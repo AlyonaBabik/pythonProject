@@ -4,7 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-def test_all_pets_have_different_names(my_pets):
+def test_pets_different_names(my_pets):
     
     element = WebDriverWait(pytest.driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, ".table.table-hover tbody tr")))
