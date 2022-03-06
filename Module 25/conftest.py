@@ -16,7 +16,7 @@ def testing():
    pytest.driver.quit()
 
 @pytest.fixture()
-def go_to_my_pets():
+def my_pets():
 
    element = WebDriverWait(pytest.driver, 5).until(EC.presence_of_element_located((By.ID, "email")))
    pytest.driver.find_element_by_id('email').send_keys(valid_email)
