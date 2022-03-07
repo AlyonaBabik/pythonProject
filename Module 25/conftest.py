@@ -18,14 +18,14 @@ def testing():
 @pytest.fixture()
 def my_pets():
 
-   element = WebDriverWait(pytest.driver, 5).until(EC.presence_of_element_located((By.ID, "email")))
+   element = WebDriverWait(pytest.driver, 10).until(EC.presence_of_element_located((By.ID, "email")))
    pytest.driver.find_element_by_id('email').send_keys(valid_email)
 
-   element = WebDriverWait(pytest.driver, 5).until(EC.presence_of_element_located((By.ID, "pass")))   
+   element = WebDriverWait(pytest.driver, 10).until(EC.presence_of_element_located((By.ID, "pass")))   
    pytest.driver.find_element_by_id('pass').send_keys(valid_password)
 
-   element = WebDriverWait(pytest.driver, 5).until(EC.presence_of_element_located((By.CSS_SELECTOR, "button[type='submit']")))   
+   element = WebDriverWait(pytest.driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "button[type='submit']")))   
    pytest.driver.find_element_by_css_selector('button[type="submit"]').click()
 
-   element = WebDriverWait(pytest.driver, 5).until(EC.presence_of_element_located((By.LINK_TEXT, "Мои питомцы")))
+   element = WebDriverWait(pytest.driver, 10).until(EC.presence_of_element_located((By.LINK_TEXT, "Мои питомцы")))
    pytest.driver.find_element_by_link_text("Мои питомцы").click()
